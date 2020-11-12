@@ -1,0 +1,42 @@
+extends layout
+
+block content
+
+  div.container
+    div.col-md-12.mt-2
+
+      h1= header
+      p #{text}
+
+      table.table.table-bordered.table-hover
+        thead
+          tr
+            th(scope='col') No
+            th(scope='col') Title
+            th(scope='col') Author
+            th(scope='col') Desc
+            th(scope='col') Action
+        tbody
+        if data_length == 0
+          tr
+            td(colspan=5 style="text-align: center;font-weight: bold;") No Data
+        else
+          each datas, key in data
+            tr
+              th(scope='row') #{key+1}
+              td #{datas.title}
+              td #{datas.author}
+              td #{datas.desc}
+              td 
+                button.btn.btn-danger#btn-delete(onclick="doDelete('" + datas._id + "')") Delete
+
+
+  script(type='text/javascript').
+
+    function doDelete(param) {
+      axios.delete('http://localhost:3000/post/'+param+'/delete')
+        .then((rest) => {
+            window.location.reload();
+        });
+    }
+

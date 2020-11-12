@@ -1,0 +1,22 @@
+extends layout
+
+block content
+
+    div.container
+        div.col-md-12.mt-2
+
+            h1= header
+            p #{text}
+
+            form(action="/doCreate", method="post")
+                .form-group
+                    label(for='input1') Title
+                    input#input1.form-control(type='text' placeholder='Enter Title', name="title")
+                .form-group
+                    label(for='input2') Author
+                    input#input2.form-control(type='text' placeholder='Enter Author', name="author")
+                .form-group
+                    label(for='input3') Description
+                    input#input3.form-control(type='text' placeholder='Enter Description', name="desc")
+                    
+                button.btn.btn-primary.mt-3(type='submit') Submit
