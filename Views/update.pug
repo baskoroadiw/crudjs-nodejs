@@ -1,0 +1,41 @@
+extends layout
+
+block content
+
+    div.container
+        div.col-md-12.mt-2
+
+            h1= header
+            p #{text}
+
+            form
+                .form-group
+                    label(for='input1') Title
+                    input#input1.form-control(type='text' placeholder='Enter Title', name="title", value=data.title)
+                .form-group
+                    label(for='input2') Author
+                    input#input2.form-control(type='text' placeholder='Enter Author', name="author", value=data.author)
+                .form-group
+                    label(for='input3') Description
+                    input#input3.form-control(type='text' placeholder='Enter Description', name="desc", value=data.desc)
+                    
+                button.btn.btn-primary.mt-3#btn-update(type='button') Submit
+
+    script.
+
+        $(document).ready(function (e) {
+
+            $('#btn-update').click(function (e) {
+                e.preventDefault();
+
+                let title = $('#input1').val();
+                let author = $('#input2').val();
+                let desc = $('#input3').val();
+
+                axios.put('#{baseurl}/post/#{data._id}/update', {title: title, author: author, desc: desc})
+                .then((rest) => {
+                    window.location = '/';
+                })
+                .catch(err => console.log(err));
+            });
+        });

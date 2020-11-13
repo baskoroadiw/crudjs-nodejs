@@ -27,14 +27,15 @@ block content
               td #{datas.title}
               td #{datas.author}
               td #{datas.desc}
-              td 
-                button.btn.btn-danger#btn-delete(onclick="doDelete('" + datas._id + "')") Delete
-
+              td
+                div.btn-group(role="group")
+                  button.btn.btn-warning#btn-update(onclick="window.location.href='/update/" + datas._id + "'") Edit
+                  button.btn.btn-danger#btn-delete(onclick="doDelete('" + datas._id + "')") Delete
 
   script(type='text/javascript').
 
     function doDelete(param) {
-      axios.delete('http://localhost:3000/post/'+param+'/delete')
+      axios.delete('#{baseurl}/post/'+param+'/delete')
         .then((rest) => {
             window.location.reload();
         });

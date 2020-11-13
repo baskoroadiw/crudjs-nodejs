@@ -7,17 +7,28 @@ const axios = require('axios').default;
 
 //index page
 exports.baseRoute = async (req, res) => {
-    axios.get('http://localhost:3000/getPosts')
+    axios.get(process.env.BASE_URL+'/getPosts')
         .then((rest) => {
             const title = 'Crud.JS | Home';
             const header = 'Welcome to Crud.JS';
             const text = 'Crud.JS is website for CRUD operation using Express JS and use Mongo DB for database. This website created by Baskoro Adi';
-            res.render('index', { title: title, header: header, text: text, data: rest.data, data_length: rest.data.length});
+            res.render('index', { title: title, header: header, text: text, data: rest.data, data_length: rest.data.length, baseurl: process.env.BASE_URL});
         }).catch(error => console.log(error));
 }
 
 exports.createPage = (req, res) => {
     res.render('create', { title: 'Crud.JS | Create', header: 'Create Posts', text: 'Please fill this form to create a new posts' });
+}
+
+exports.updatePage = async (req, res) => {
+    let postID = req.params.id;
+    axios.get(process.env.BASE_URL+'/getPost/'+postID)
+        .then((rest) => {
+            const title = 'Crud.JS | Edit';
+            const header = 'Edit Posts';
+            const text = 'Please fill this form to edit post';
+            res.render('update', { title: title, header: header, text: text, data: rest.data.data, baseurl: process.env.BASE_URL });
+        })
 }
 
 //function create post
@@ -72,8 +83,7 @@ exports.updatePost = async (req, res) => {
         }
         else {
             res.status(200).json({
-                message: "Post Updated",
-                data,
+                message: "Post Updated"
             });
         }
     });

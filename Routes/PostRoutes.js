@@ -9,6 +9,8 @@ router.get('/', postController.baseRoute);
 
 router.get('/create', postController.createPage);
 
+router.get('/update/:id', postController.updatePage);
+
 //function
 router.post('/doCreate', postController.createPost);
 
