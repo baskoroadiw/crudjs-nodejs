@@ -8,6 +8,7 @@ Crud JS adalah aplikasi sederhana untuk melakukan operasi create, read, update, 
 2. Tambahkan code berikut
 ```shell
 DATABASE = API_KEY_FROM_MONGODB
+BASE_URL = http://localhost:3000
 ```
 3. Lalu save file
 4. Buka cmd di root folder
